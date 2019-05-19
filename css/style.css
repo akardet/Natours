@@ -51,11 +51,13 @@ body {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%); /* Center the box (shifts the box by half its width and height */
+  text-align: center;
 }
 
 .heading-primary {
   color: #fff;
   text-transform: uppercase;
+  margin-bottom: 50px;
 
   backface-visibility: hidden; /* Fix shaking in animation */
 }
@@ -120,4 +122,73 @@ body {
     opacity: 1;
     transform: translate(0);
   }
+}
+
+@keyframes moveInBottom {
+  /* Start of animation */
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  /* End of animation */
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pseudoclass - to style elements under special conditions */
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block; /* When using padding */
+  border-radius: 100px;
+  transition: all .2s;
+  position: relative;
+}
+
+.btn-animated {
+  animation: moveInBottom .7s ease-out .75s;
+  animation-fill-mode: backwards; /* Applies style before animation starts */
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,.2);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.btn-white {
+  background-color: #fff;
+  color: #777
+}
+
+/* Pseudoelement */
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all .4s;
+}
+
+.btn-white::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
 }
